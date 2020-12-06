@@ -1,0 +1,22 @@
+{
+  "name": "teste_tindin",
+  "version": "1.0.0",
+  "description": "Simples projeto criado em Node para demonstrar conhecimentos na tecnologia",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon ./src/app.js"
+  },
+  "keywords": [],
+  "author": "Petterson",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.4"
+  },
+  "dev-dependencies": {
+    "jest": "^26.6.3",
+    "nodemon": "^2.0.6"
+  }
+}
