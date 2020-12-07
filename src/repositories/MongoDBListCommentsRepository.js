@@ -1,18 +1,16 @@
-const Comment = require("../entities/Comment")
+const Comment = require('../entities/Comment');
 
-class MongoDBListCommentsRepository  {
-  
-  
-  
-  async list(page){
-    const count = await Comment.estimatedDocumentCount()
-    const comments = await Comment.pagination(page)
-    
+class MongoDBListCommentsRepository {
+  async list(page) {
+    console.log('chegou aqui');
+    const count = await Comment.estimatedDocumentCount();
+    const comments = await Comment.pagination(page);
+
     return {
       comments,
-      count
-    }
+      count,
+    };
   }
 }
 
-module.exports = MongoDBListCommentsRepository
+module.exports = MongoDBListCommentsRepository;

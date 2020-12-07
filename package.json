@@ -4,7 +4,9 @@
   "description": "Simples projeto criado em Node para demonstrar conhecimentos na tecnologia",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon ./src/app.js"
+    "dev": "nodemon ./src/server.js",
+    "test": "jest",
+    "lint": "eslint . --fix --ext .js"
   },
   "keywords": [],
   "author": "Petterson",
@@ -15,8 +17,15 @@
     "express": "^4.17.1",
     "mongoose": "^5.11.4"
   },
-  "dev-dependencies": {
+  "devDependencies": {
+    "eslint": "^7.15.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^7.0.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.2.0",
     "jest": "^26.6.3",
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.6",
+    "prettier": "^2.2.1",
+    "supertest": "^6.0.1"
   }
 }

@@ -1,19 +1,20 @@
-const Class = require("../entities/Class")
+const Class = require('../entities/Class');
 
-class MongoDBCreateClassRepository  {
-  
-  async create(data){
-    const  newClass = await Class.create(data)
-    
-    return newClass
+class MongoDBCreateClassRepository {
+  async create(data) {
+    const hasClass = await this._validate(data.video);
+    if (hasClass) throw new Error('User Already Exists');
+    const newClass = await Class.create(data);
+
+    return newClass;
   }
-  
-  async validate(video_url){
-    const isClassCreated = await Class.findOne(video_url)
-    if(isClassCreated) return true
-    
-    return false
+
+  async _validate(video) {
+    const isClassCreated = await Class.findOne({ video });
+    if (isClassCreated) return true;
+
+    return false;
   }
 }
 
-module.exports = MongoDBCreateClassRepository
+module.exports = MongoDBCreateClassRepository;

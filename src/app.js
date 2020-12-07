@@ -1,45 +1,42 @@
-const express = require("express")
-const mongoose = require("mongoose")
-const cors = require("cors")
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
 
-
-const { MONGO_URL, NODE_ENV, APP_URL } = require("./config/consts")
-
-if (NODE_ENV !== "production") {
-  require("dotenv").config()
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
 }
-const routes = require("./routes")
 
+const { MONGO_URL, APP_URL } = require('./config/consts');
 
-corsOptions = {
-  origin: APP_URL || undefined
-}
+const routes = require('./routes');
+
+const corsOptions = {
+  origin: APP_URL || undefined,
+};
 
 class App {
-
   constructor() {
-    this.express = express()
-    this_middlewares()
-    this._database()
-    this._routes()
-
+    this.express = express();
+    this._middlewares();
+    this._database();
+    this._routes();
   }
 
   _middlewares() {
-    this.express.use(express.json())
-    this.express.use(cors(corsOptions))
+    this.express.use(express.json());
+    this.express.use(cors(corsOptions));
   }
 
   _database() {
-    mongoose.connect(process.env.MONGO_URL, {
+    mongoose.connect(MONGO_URL, {
       useNewUrlParser: true,
-      useUnifiedTypology: true
-    })
+      useUnifiedTopology: true,
+    });
   }
 
   _routes() {
-    this.express.use(routes)
+    this.express.use(routes);
   }
 }
 
-module.exports = new App().express
+module.exports = new App().express;

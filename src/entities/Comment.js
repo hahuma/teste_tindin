@@ -1,30 +1,29 @@
-const { Schema, model } = require('mongoose')
-const pagination = require("../helpers/pagination")
+const { Schema, model } = require('mongoose');
+const pagination = require('../helpers/pagination');
 
-const CommentSchema = new Schema({
-  id_class: {
-    type: Schema.Types.ObjectId,
-    required: true,
-    ref: 'Class'
+const CommentSchema = new Schema(
+  {
+    id_class: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: 'Class',
+    },
+    comment: {
+      type: String,
+      required: true,
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    },
   },
-  comment: {
-    type: String,
-    required: true
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now
+  {
+    timestamps: true,
   }
-  
-}, {
-  timestamps: true
-})
-
+);
 
 CommentSchema.statics = {
-  pagination
-}
+  pagination,
+};
 
-const Comment = model('Comment', CommentSchema)
-
-module.exports = new Comment()
+module.exports = model('Comment', CommentSchema);

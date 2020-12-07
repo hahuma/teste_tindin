@@ -1,9 +1,7 @@
-const MONGO_URL = process.env.MONGO_URL
-const NODE_ENV = process.env.NODE_ENV
-const PORT = process.env.PORT
+const { MONGO_URL } = process.env;
+const { PORT } = process.env;
 
 module.exports = {
   MONGO_URL,
-  NODE_ENV,
-  PORT
-}
+  PORT,
+};

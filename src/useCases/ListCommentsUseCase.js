@@ -1,20 +1,16 @@
 class ListCommentsUseCase {
-  
-  constructor (ListCommentsRepository){
-    this.listCommentsRepository = ListCommentsRepository
+  constructor(ListCommentsRepository) {
+    this.listCommentsRepository = ListCommentsRepository;
   }
-  async execute(data){
-    
-    const { comments, count } = await this.listCommentsRepository.list(page)
-    
-    
+
+  async execute(page) {
+    const { comments, count } = await this.listCommentsRepository.list(page);
+
     return {
       comments,
-      count
-    }
-    
+      count,
+    };
   }
-  
-} 
+}
 
-module.exports = ListCommentsUseCase
+module.exports = ListCommentsUseCase;

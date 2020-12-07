@@ -1,20 +1,16 @@
- class ListClassesUseCase {
-  
-  constructor (ListClassesRepository){
-    this.listClassesRepository = ListClassesRepository
+class ListClassesUseCase {
+  constructor(ListClassesRepository) {
+    this.listClassesRepository = ListClassesRepository;
   }
-  async execute(data){
-    
-    const { classes, count } = await this.listClassRepository.list(page)
-    
-    
+
+  async execute(page) {
+    const { classes, count } = await this.listClassesRepository.list(page);
+
     return {
       classes,
-      count
-    }
-    
+      count,
+    };
   }
-  
-} 
+}
 
-module.exports = ListClassesUseCase
+module.exports = ListClassesUseCase;
