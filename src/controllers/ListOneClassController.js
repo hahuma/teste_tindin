@@ -8,7 +8,7 @@ class ListOneClassController {
       const { id } = req.params;
       const filteredClass = await this._listOneClassUseCase.execute(id);
 
-      return res.status(201).json(filteredClass);
+      return res.status(200).json(filteredClass);
     } catch (e) {
       return res.status(400).json({
         message: e.message || 'Internal server Error, try again later',

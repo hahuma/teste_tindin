@@ -3,7 +3,11 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config();
+  require('dotenv').config({
+    path: process.env.NODE_ENV === 'test' ? '.env' : '.env',
+  });
+
+  console.log('me lembre')
 }
 
 const { MONGO_URL, APP_URL } = require('./config/consts');
