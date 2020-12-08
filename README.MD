@@ -44,7 +44,7 @@ Requisitando aulas subsequentes (sempre de 50 em 50):
 
 O retorno será um array de aulas como o exemplo abaixo:
 
-``` json
+``` js
 [
     {
         "total_comments": 10, // total de comentários
@@ -82,7 +82,7 @@ Este método necessita de um ```request.body``` como no exemplo abaixo contendo 
 
 **Body da requisição:**
 
-```json
+```js
 {
     "name": "Aula y", // nome da aula
     "description": "Tirando suas dúvidas sobre...", // descrição da aula
@@ -104,7 +104,7 @@ Esta rota é usada caso seja preciso retornar os dados de uma única aula cadast
 
 **Exemplo de Response:**
 
-``` json
+``` js
 {
   "total_comments": 14, // total de comentários
   "_id": "a232rfe33284dsa23", // _id da aula que é criado pelo banco de dados 
@@ -140,7 +140,7 @@ Através dessa requisição é feita a atualização de uma aula já existente e
 
 **Body:**
 
-```json
+```js
 {
     "name": "Aula y",
     "description": "nova descrição", 
@@ -168,7 +168,7 @@ Essa rota se comporta da mesma maneira que a rota ``` /classes ``` e utiliza do 
 
 **Exemplo de resposta para essa requisição:**
 
-``` json
+``` js
 [
     {
         "_id": "a232rfe33284dsa23", // _id do comentário que é criado pelo banco de dados 
@@ -196,7 +196,7 @@ Este método necessita de um ```request.body``` com apenas um campo, que é o co
 
 **Body da requisição:**
 
-```json
+```js
 {
     "comment": "Obrigado por essa aula"
 }
