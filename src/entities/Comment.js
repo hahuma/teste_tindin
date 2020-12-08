@@ -1,5 +1,4 @@
 const { Schema, model } = require('mongoose');
-const pagination = require('../helpers/pagination');
 
 const CommentSchema = new Schema(
   {
@@ -22,8 +21,8 @@ const CommentSchema = new Schema(
   }
 );
 
-CommentSchema.statics = {
-  pagination,
-};
+// CommentSchema.pre(/^lastThreeComments$/, function() {
+
+// }
 
 module.exports = model('Comment', CommentSchema);

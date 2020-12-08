@@ -4,7 +4,7 @@ class UpdateClassUseCase {
   }
 
   async execute(data) {
-    const hasClass = this.updateClassRepository.validate(data.video_url);
+    const hasClass = this.updateClassRepository.validate(data.video);
 
     if (!hasClass) throw new Error('This class does not exist');
 

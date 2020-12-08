@@ -4,7 +4,6 @@ class ListCommentsController {
   }
 
   async handle(req, res) {
-    console.log('foi chamado');
     try {
       const { page } = req.query;
       const { comments, count } = await this._listCommentsUseCase.execute(page);

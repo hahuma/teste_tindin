@@ -1,6 +1,5 @@
 /* eslint-disable func-names */
 const { Schema, model } = require('mongoose');
-const pagination = require('../helpers/pagination');
 const setDate = require('../helpers/setDate');
 
 const ClassSchema = new Schema(
@@ -44,34 +43,32 @@ const ClassSchema = new Schema(
       type: Number,
       default: 0,
     },
-    comments: [
-      {
-        type: [String],
-        select: false,
-      },
-    ],
+    comments: {
+      type: [String],
+      select: false,
+    },
     last_comment: {
       type: String,
       select: false,
-      default: '',
     },
     last_comment_date: {
       type: Date,
       select: false,
-      default: undefined,
     },
   },
   {
     timestamps: true,
+    toJSON: {
+      virtuals: true,
+    },
+    toObject: {
+      virtuals: true,
+    },
   }
 );
 
 ClassSchema.pre(/Update/, function () {
   this._update.$set.date_updated = setDate();
 });
-
-ClassSchema.statics = {
-  pagination,
-};
 
 module.exports = model('Class', ClassSchema);

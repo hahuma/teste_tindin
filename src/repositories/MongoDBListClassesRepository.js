@@ -1,40 +1,40 @@
 const Class = require('../entities/Class');
 const Comment = require('../entities/Comment');
 
+const { PAGE_SKIP } = require('../config/consts');
+
 class MongoDBListClassesRepository {
   async list(page) {
-    const count = await Class.estimatedDocumentCount().select('+last_comment +last_comment_date');
-    const paginatedClasses = await Class.pagination(page);
+    const count = await Class.estimatedDocumentCount();
+    const paginatedClasses = await Class.find()
+      .populate('comment')
+      .sort({ createdAt: -1 })
+      .limit(50)
+      .skip(PAGE_SKIP * (page - 1));
+    const classesWithComments = Promise.all(
+      paginatedClasses.map(async (paginatedClass) => {
+        const commentData = await this.getLastComment(paginatedClass.id);
+        const data = {
+          ...paginatedClass._doc,
+          last_comment: commentData[0]?.comment,
+          last_comment_date: commentData[0]?.createdAt,
+        };
+        return data;
+      })
+    );
 
-    const data = paginatedClasses.map((singleClass) => {
-      const commentData = this._getLastComment(singleClass._id);
-      return {
-        name: singleClass.name,
-        description: commentData?.comment,
-        video: singleClass.video,
-        data_init: singleClass.data_init,
-        data_end: singleClass.data_end,
-        date_created: singleClass.date_created,
-        date_updated: singleClass.date_updated,
-        total_comments: singleClass.total_comments,
-        last_comment: commentData?.comment,
-        last_comment_date: commentData?.createdAt,
-      };
-    });
-
-    const classes = await Promise.all(data);
+    const classes = await classesWithComments;
     return {
       classes,
       count,
     };
   }
 
-  async _getLastComment(_id) {
-    const lastComment = await Comment.find({ id_class: _id }).sort({
-      createdAt: -1,
-    });
-
-    return lastComment;
+  async getLastComment(id) {
+    const commentData = await Comment.find({ id_class: id })
+      .sort({ createdAt: -1 })
+      .limit(1);
+    return commentData;
   }
 }
 
